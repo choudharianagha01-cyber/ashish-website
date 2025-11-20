@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ firm_name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="hero-text">
+        <h1 class="firm-name homepage-name display-3 fw-bold">{{ firm_name }}</h1>
+        <h4 class="tagline">{{ tagline }}</h4>
+        <a href="{{ url_for('blog') }}" class="btn btn-outline-light mt-4">Read Today's Blog</a>
+    </div>
+    <div class="hero-img"></div>
+</div>
+
+</body>
+</html>
+{% endblock %}

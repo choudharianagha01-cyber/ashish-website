@@ -1,0 +1,315 @@
+/* ========== Reset & Body ========== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* ========== Navbar ========== */
+.navbar {
+    font-size: 1.1rem;
+    letter-spacing: 0.3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background-color: #111 !important;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-brand .firm-name {
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+}
+
+.navbar-brand .firm-name:hover {
+    color: #e0e0e0;
+    text-decoration: none;
+}
+
+.navbar-nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    color: #cccccc;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffffff;
+}
+
+/* ========== Hero Section ========== */
+.homepage-name {
+    color: #ffffff !important;
+    font-size: 3.75rem;
+}
+.hero-section {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+}
+/* Left Text Area */
+.hero-text {
+    flex: 1;
+    background-color: #000;
+    color: white !important;
+    padding: 6rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+}
+
+.firm-name {
+    font-size: 3.75rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    font-family: 'Georgia', serif;
+}
+
+.tagline {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #dddddd;
+    margin-bottom: 2rem;
+}
+
+.btn-outline-light {
+    font-weight: 500;
+    border: 2px solid #fff;
+    padding: 0.6rem 1.4rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    color: #fff;
+    background: transparent;
+    cursor: pointer;
+}
+
+.btn-outline-light:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+/* Right Image Area */
+.hero-img {
+    flex: 1;
+    background-image: url("../images/homepage_bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-width: 0;
+}
+
+/* ========== About Section ========== */
+.about-section {
+    background-color: #ffffff;
+    padding: 5rem 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about-section .about-text {
+    flex: 1 1 50%;
+}
+
+.about-section .about-image {
+    flex: 1 1 40%;
+    max-width: 450px;
+}
+
+.about-section h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #111;
+}
+
+.about-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #444;
+}
+
+.about-section img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== Responsive Tweaks ========== */
+@media (max-width: 768px) {
+    .hero-section {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .hero-text,
+    .hero-img {
+        flex: 1 1 100%;
+        padding: 3rem 2rem;
+        min-height: 300px;
+    }
+
+    .firm-name {
+        font-size: 2.5rem;
+    }
+
+    .tagline {
+        font-size: 1.2rem;
+    }
+
+    .about-section {
+        flex-direction: column;
+        padding: 3rem 2rem;
+    }
+
+    .about-section .about-image {
+        max-width: 100%;
+    }
+}
+/* ========== Practice Areas Styles ========== */
+
+/* Global body background and text */
+body {
+    background-color: #3b2b1d; /* Rich brown-gold base */
+    color: #f5f5f5;            /* Light text for contrast */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Grid Container */
+.practice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+}
+
+/* Practice Card */
+.practice-card {
+    background-color: #fdf9f4; /* Light elegant card background */
+    border: 1px solid #d8b88a; /* Light gold-brown border */
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.practice-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Icon Style */
+.practice-icon {
+    font-size: 1.5rem;
+    color: #9c7248; /* Gold-brown icon color */
+    margin-right: 0.8rem;
+    flex-shrink: 0;
+}
+
+/* Card Heading */
+.practice-card h5 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #3b2b1d; /* Strong heading on light card */
+    margin: 0;
+}
+
+/* General Class Override */
+.text-primary,
+.practice-icon {
+    color: #9c7248 !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+    .practice-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 1rem;
+    }
+
+    .practice-card {
+        padding: 0.6rem 0.9rem;
+    }
+
+    .practice-icon {
+        font-size: 1.35rem;
+    }
+
+    .practice-card h5 {
+        font-size: 0.95rem;
+    }
+}
+
+/* ========== Contact Page - Lawyer Card ========== */
+
+body {
+    background-color: #3b2b1d; /* Deep brown background */
+    color: #fdfaf4;
+}
+
+.contact-wrapper {
+    max-width: 650px;
+    margin: 3rem auto;
+    padding: 1rem;
+}
+
+.lawyer-card {
+    background-color: #fbf7f2; /* Elegant light cream */
+    border: 1px solid #d4b48a;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.lawyer-logo {
+    width: 60px;
+    height: 60px;
+}
+
+.firm-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #3b2b1d;
+    margin-bottom: 0.5rem;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #d4b48a;
+    margin: 1rem auto;
+    width: 60%;
+}
+
+.lawyer-card p {
+    font-size: 1.1rem;
+    margin: 0.8rem 0;
+    color: #3b2b1d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-icon {
+    color: #9c7248; /* Gold brown */
+    font-size: 1.2rem;
+    margin-right: 0.6rem;
+}

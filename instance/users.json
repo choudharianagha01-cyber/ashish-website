@@ -1,0 +1,7 @@
+[
+  {
+    "username": "anagha",
+    "password_hash": "scrypt:32768:8:1$UGSGTJhTDqXvslem$9722205855d5cac201c794775f043c49a08df3e2e5ef21b28e21eb6a4f9bee4e37330ddef20c06502283ca4182cf51cee5de18d5c37ac80ea5a47cc29edbbd02",
+    "is_admin": true
+  }
+]
