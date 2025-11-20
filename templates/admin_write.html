@@ -9,7 +9,13 @@
             <div class="alert alert-info">{{ message }}</div>
         {% endif %}
 
+        {# Mode handling: show login form or write form depending on `mode` variable #}
+        {% if mode == 'write' %}
         <form method="post">
+            <input type="hidden" name="action" value="publish">
+            <input type="hidden" name="username" value="{{ username }}">
+            <input type="hidden" name="password" value="{{ password }}">
+
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input type="text" class="form-control" id="title" name="title" required>
@@ -21,6 +27,20 @@
             <button type="submit" class="btn btn-success">Publish</button>
             <a href="{{ url_for('blog') }}" class="btn btn-secondary ms-2">View Published</a>
         </form>
+        {% else %}
+        <form method="post">
+            <input type="hidden" name="action" value="login">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Continue</button>
+        </form>
+        {% endif %}
     </div>
 </div>
 

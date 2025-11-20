@@ -97,56 +97,63 @@ def view_post(post_id):
     return render_template('post.html', firm_name=os.getenv("FIRM_NAME"), tagline=os.getenv("TAGLINE"), post=post)
 
 
-def check_basic_auth(username, password):
+def check_credentials(username, password):
     expected_user = os.getenv("PUBLISH_USER")
     expected_pass = os.getenv("PUBLISH_PASS")
-    return expected_user and expected_pass and username == expected_user and password == expected_pass
-
-
-def authenticate():
-    return Response('Authentication required', 401, {'WWW-Authenticate': 'Basic realm="Login Required"'})
-
-
-def requires_basic_auth(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        auth = request.authorization
-        if not auth or not check_basic_auth(auth.username, auth.password):
-            return authenticate()
-        return f(*args, **kwargs)
-    return decorated
+    return bool(expected_user and expected_pass and username == expected_user and password == expected_pass)
 
 
 @app.route("/admin/write", methods=["GET", "POST"])
-@requires_basic_auth
 def admin_write():
+    # In-page credential flow: GET shows login form; POST can be 'login' to show write form
+    # or 'publish' to save a post. No server-side session; user must re-authenticate each visit.
     message = None
     if request.method == "POST":
-        title = request.form.get("title", "").strip()
-        content = request.form.get("blog_content", "").strip()
-        if not title or not content:
-            flash("Title and content are required", "danger")
-            return redirect(url_for("admin_write"))
+        action = request.form.get("action")
+        if action == "login":
+            username = request.form.get("username", "").strip()
+            password = request.form.get("password", "")
+            if check_credentials(username, password):
+                # Show write form; include username/password as hidden fields so publish can re-check
+                return render_template("admin_write.html", firm_name=os.getenv("FIRM_NAME"), mode="write", username=username, password=password)
+            else:
+                flash("Invalid credentials", "danger")
+                return render_template("admin_write.html", firm_name=os.getenv("FIRM_NAME"), mode="login")
 
-        try:
-            posts = load_posts()
-            next_id = max((p.get("id", 0) for p in posts), default=0) + 1
-            post = {
-                "id": next_id,
-                "title": title,
-                "content": content,
-                "author": os.getenv("FIRM_NAME", "Admin"),
-                "timestamp": datetime.utcnow().isoformat()
-            }
-            posts.append(post)
-            save_posts(posts)
-            message = "Post published successfully."
-        except Exception as e:
-            message = f"Failed to save post: {e}"
+        if action == "publish":
+            # Validate credentials again from the form
+            username = request.form.get("username", "").strip()
+            password = request.form.get("password", "")
+            if not check_credentials(username, password):
+                flash("Invalid credentials", "danger")
+                return render_template("admin_write.html", firm_name=os.getenv("FIRM_NAME"), mode="login")
 
-        return redirect(url_for("view_post", post_id=post.get("id")))
+            title = request.form.get("title", "").strip()
+            content = request.form.get("blog_content", "").strip()
+            if not title or not content:
+                flash("Title and content are required", "danger")
+                return render_template("admin_write.html", firm_name=os.getenv("FIRM_NAME"), mode="write", username=username)
 
-    return render_template("admin_write.html", firm_name=os.getenv("FIRM_NAME"), message=message)
+            try:
+                posts = load_posts()
+                next_id = max((p.get("id", 0) for p in posts), default=0) + 1
+                post = {
+                    "id": next_id,
+                    "title": title,
+                    "content": content,
+                    "author": os.getenv("FIRM_NAME", "Admin"),
+                    "timestamp": datetime.utcnow().isoformat()
+                }
+                posts.append(post)
+                save_posts(posts)
+                message = "Post published successfully."
+            except Exception as e:
+                message = f"Failed to save post: {e}"
+
+            return redirect(url_for("view_post", post_id=post.get("id")))
+
+    # Default: show login form
+    return render_template("admin_write.html", firm_name=os.getenv("FIRM_NAME"), mode="login")
 
 
 if __name__ == "__main__":
