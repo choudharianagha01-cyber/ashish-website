@@ -6,6 +6,7 @@
     --background: {{ color_background }};  /* Main background */
     --accent: {{ color_accent }};      /* Borders / Icons / Muted accents */
     --white: {{ color_white }};
+    --color-secondary: {{ color_secondary }};
 }
 
 /* ===============================
@@ -105,6 +106,14 @@ a:hover {
 .nav-link.active {
     text-decoration: underline;
     text-underline-offset: 6px;
+}
+
+.navbar {
+    background-color: var(--background) !important;
+}
+
+body, .about-section, .contact-wrapper, .practice-card, .blog-header, .blog, .container, .home-hero, .home-bg {
+    background-color: var(--color-secondary) !important;
 }
 
 /* ===============================
@@ -287,4 +296,8 @@ footer {
 
 .hero-actions .btn {
     padding: 10px 22px;
+}
+
+.home-bg {
+    background-color: var(--color-secondary) !important;
 }

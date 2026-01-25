@@ -9,10 +9,10 @@
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
     {% for area in practice_areas %}
     <div class="col">
-        <div class="card text-center practice-card h-100" style="background:var(--background);color:var(--primary);">
+            <div class="card text-center practice-card h-100" style="background: var(--accent) !important; color: var(--primary) !important;">
             <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                <i class="fas {{ area.icon }} fa-2x mb-3 practice-icon" style="color:var(--accent);"></i>
-                <h5 class="card-title" style="color:var(--primary);">{{ area.name }}</h5>
+                    <i class="fas {{ area.icon }} fa-2x mb-3 practice-icon" style="color: var(--white) !important;"></i>
+                    <h5 class="card-title">{{ area.name }}</h5>
             </div>
         </div>
     </div>

@@ -1,3 +1,32 @@
+/* BLOG CARD CUSTOMIZATION */
+.blog-card,
+.blog-card.card,
+.blog-card .card-body,
+.blog-card .card-title,
+.blog-card .card-text,
+.blog-card .card-footer {
+    background: var(--accent) !important;
+    color: var(--white) !important;
+    border: none !important;
+    border-radius: 14px !important;
+    box-shadow: 0 2px 8px rgba(32,32,12,0.04) !important;
+    transition: transform 0.15s, box-shadow 0.15s !important;
+}
+.blog-card .card-title,
+.blog-card .card-text,
+.blog-card .card-body {
+    color: var(--white) !important;
+}
+.blog-card .btn-outline-light {
+    border-color: var(--white) !important;
+    color: var(--accent) !important;
+    background: var(--white) !important;
+}
+.blog-card .btn-outline-light:hover {
+    background: var(--secondary) !important;
+    color: var(--accent) !important;
+    border-color: var(--secondary) !important;
+}
 /* Practice area icon color */
 .practice-icon {
     color: #20200c !important;

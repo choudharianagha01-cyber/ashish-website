@@ -170,10 +170,12 @@ def get_config():
     return {
         'firm_name': os.getenv('FIRM_NAME', 'Lexway Solutions'),
         'lawyer_name': os.getenv('LAWYER_NAME', 'Advocate Ashish Patil'),
+        'lawyer_name_contact': os.getenv('LAWYER_NAME_CONTACT', ''),
+        'lawyer_qualification_contact': os.getenv('LAWYER_QUALIFICATION_CONTACT', ''),
         'hero_tagline': os.getenv('HERO_TAGLINE', ''),
         'hero_button_1': os.getenv('HERO_BUTTON_1', 'Consult Now'),
-        'hero_button_2': os.getenv('HERO_BUTTON_2', 'Practice Areas'),
-        'about_title': os.getenv('ABOUT_TITLE', 'About'),
+        'hero_button_2': os.getenv('HERO_BUTTON_2', 'Read Latest Blog'),
+        'about_title': os.getenv('ABOUT_TITLE', 'About Lexway Solutions'),
         'about_description': os.getenv('ABOUT_DESCRIPTION', ''),
         'about_description_2': os.getenv('ABOUT_DESCRIPTION_2', ''),
         'contact_address': os.getenv('CONTACT_ADDRESS', ''),
@@ -189,6 +191,7 @@ def get_config():
         'image_about': os.getenv('IMAGE_ABOUT', 'images/about_lawyer.png'),
         'image_hero_bg': os.getenv('IMAGE_HERO_BG', 'images/law-office-bg.jpg'),
         'homepage_bg': os.getenv('HOMEPAGE_BG', 'images/homepage_bg.png'),
+        'linkedin_url': os.getenv('LINKEDIN_URL', ''),
     }
 
 @app.route('/static/css/style.css')
