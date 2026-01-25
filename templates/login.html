@@ -1,4 +1,18 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block content %}
-<div class="alert alert-info">Log in is disabled. Use the hidden publish token URL to publish posts.</div>
+<div class="login-wrapper d-flex flex-column align-items-center justify-content-center" style="min-height: 60vh;">
+    <img src="{{ url_for('static', filename=image_logo) }}" alt="Firm Logo" class="mb-4" style="width: 80px; height: 80px;">
+    <h2 class="mb-3">Login to {{ firm_name }}</h2>
+    <form method="post" class="w-100" style="max-width: 350px;">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-outline-dark w-100">Login</button>
+    </form>
+</div>
 {% endblock %}

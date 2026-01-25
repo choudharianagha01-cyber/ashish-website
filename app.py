@@ -41,20 +41,17 @@ def home():
         # Use first line or first 150 chars as preview
         blog_preview = (content.splitlines()[0][:150] + ("..." if len(content) > 150 else "")) if content else "No blog posted today."
 
-    return render_template("index.html",
-                           firm_name=os.getenv("FIRM_NAME"),
-                           tagline=os.getenv("TAGLINE"),
-                           blog_preview=blog_preview)
+    config = get_config()
+    config['blog_preview'] = blog_preview
+    return render_template("index.html", **config)
 
 @app.route("/about")
 def about():
-    return render_template(
-        "about.html",
-        firm_name=os.getenv("FIRM_NAME"),
-        tagline=os.getenv("TAGLINE")
-    )
+    config = get_config()
+    return render_template("about.html", **config)
 @app.route('/practice')
 def practice():
+    config = get_config()
     practice_areas = [
         {"name": "Criminal Law", "icon": "fa-gavel"},
         {"name": "Family Law", "icon": "fa-people-roof"},
@@ -73,11 +70,13 @@ def practice():
         {"name": "Contract Law", "icon": "fa-file-signature"},
         {"name": "Insurance Law", "icon": "fa-file-invoice-dollar"}
     ]
-    return render_template('practice.html', firm_name=os.getenv("FIRM_NAME"), practice_areas=practice_areas)
+    config['practice_areas'] = practice_areas
+    return render_template('practice.html', **config)
 
 @app.route("/contact")
 def contact():
-    return render_template("contact.html", firm_name=os.getenv("FIRM_NAME"), tagline=os.getenv("TAGLINE"))
+    config = get_config()
+    return render_template("contact.html", **config)
 
 
 @app.route('/blog')
@@ -85,16 +84,27 @@ def blog():
     # List all posts (most recent first)
     posts = load_posts()
     posts_sorted = sorted(posts, key=lambda p: p.get("timestamp", ""), reverse=True)
-    return render_template('blog.html', firm_name=os.getenv("FIRM_NAME"), tagline=os.getenv("TAGLINE"), posts=posts_sorted)
+    config = get_config()
+    config['posts'] = posts_sorted
+    return render_template('blog.html', **config)
 
 
 @app.route('/blog/<int:post_id>')
 def view_post(post_id):
     posts = load_posts()
     post = next((p for p in posts if p.get("id") == post_id), None)
-    if not post:
-        return render_template('post.html', firm_name=os.getenv("FIRM_NAME"), tagline=os.getenv("TAGLINE"), post=None), 404
-    return render_template('post.html', firm_name=os.getenv("FIRM_NAME"), tagline=os.getenv("TAGLINE"), post=post)
+    config = get_config()
+    config['post'] = post
+    return render_template('post.html', **config) if post else (render_template('post.html', **config), 404)
+
+
+@app.route('/latest_blog')
+def latest_blog():
+    posts = load_posts()
+    if not posts:
+        return redirect(url_for('blog'))
+    latest = sorted(posts, key=lambda p: p.get('timestamp', ''), reverse=True)[0]
+    return redirect(url_for('view_post', post_id=latest.get('id')))
 
 
 def check_credentials(username, password):
@@ -155,6 +165,37 @@ def admin_write():
     # Default: show login form
     return render_template("admin_write.html", firm_name=os.getenv("FIRM_NAME"), mode="login")
 
+
+def get_config():
+    return {
+        'firm_name': os.getenv('FIRM_NAME', 'Lexway Solutions'),
+        'lawyer_name': os.getenv('LAWYER_NAME', 'Advocate Ashish Patil'),
+        'hero_tagline': os.getenv('HERO_TAGLINE', ''),
+        'hero_button_1': os.getenv('HERO_BUTTON_1', 'Consult Now'),
+        'hero_button_2': os.getenv('HERO_BUTTON_2', 'Practice Areas'),
+        'about_title': os.getenv('ABOUT_TITLE', 'About'),
+        'about_description': os.getenv('ABOUT_DESCRIPTION', ''),
+        'about_description_2': os.getenv('ABOUT_DESCRIPTION_2', ''),
+        'contact_address': os.getenv('CONTACT_ADDRESS', ''),
+        'contact_phone': os.getenv('CONTACT_PHONE', ''),
+        'contact_email': os.getenv('CONTACT_EMAIL', ''),
+        'color_primary': os.getenv('COLOR_PRIMARY', '#20200c'),
+        'color_secondary': os.getenv('COLOR_SECONDARY', '#e3e3d6'),
+        'color_background': os.getenv('COLOR_BACKGROUND', '#d6d6c1'),
+        'color_accent': os.getenv('COLOR_ACCENT', '#84846f'),
+        'color_white': os.getenv('COLOR_WHITE', '#ffffff'),
+        'color_about_bg': os.getenv('COLOR_ABOUT_BG', '#f5f5f5'),
+        'image_logo': os.getenv('IMAGE_LOGO', 'images/logo.png'),
+        'image_about': os.getenv('IMAGE_ABOUT', 'images/about_lawyer.png'),
+        'image_hero_bg': os.getenv('IMAGE_HERO_BG', 'images/law-office-bg.jpg'),
+        'homepage_bg': os.getenv('HOMEPAGE_BG', 'images/homepage_bg.png'),
+    }
+
+@app.route('/static/css/style.css')
+def dynamic_style():
+    config = get_config()
+    response = Response(render_template('style.css', **config), mimetype='text/css')
+    return response
 
 if __name__ == "__main__":
     app.run(debug=True)

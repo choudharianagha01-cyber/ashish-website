@@ -1,22 +1,10 @@
-/* Practice area icon color */
-.practice-icon {
-    color: #20200c !important;
-}
-.btn-blog-theme {
-    color: var(--primary) !important;
-    background-color: var(--white) !important;
-    border: 2px solid var(--primary) !important;
-    box-shadow: 0 2px 8px rgba(32,32,12,0.04);
-    transition: background 0.2s, color 0.2s;
-}
 /* ===============================
    GLOBAL THEME VARIABLES
    =============================== */
 :root {
-    --primary: {{ color_primary }};
-    --secondary: {{ color_secondary }};
-    --background: {{ color_background }};
-    --accent: {{ color_accent }};
+    --primary: {{ color_primary }};     /* Authority / Headings / Text */
+    --background: {{ color_background }};  /* Main background */
+    --accent: {{ color_accent }};      /* Borders / Icons / Muted accents */
     --white: {{ color_white }};
 }
 
@@ -35,14 +23,6 @@ body {
     font-family: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
     line-height: 1.65;
     font-size: 16px;
-}
-
-.home-bg {
-    background-image: url("../images/homepage_bg.png");
-    background-size: contain;
-    background-position: right bottom;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 
 /* Headings */
@@ -65,42 +45,29 @@ a {
 }
 
 a:hover {
-    text-decoration: none;
-}
-
-.navbar-brand:hover {
-    text-decoration: none !important;
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }
 
 /* ===============================
    BUTTONS
    =============================== */
 .btn {
-    border-radius: 0px !important;
+    border-radius: 8px;
     font-weight: 500;
-    text-decoration: none !important;
-    padding: 12px 24px !important;
-    border: none !important;
-    transition: all 0.3s ease;
-}
-
-.btn:hover,
-.btn:focus,
-.btn:active {
-    background-color: var(--accent) !important;
-    color: var(--white) !important;
-    border-color: var(--accent) !important;
 }
 
 .btn-outline-dark {
-    border-color: transparent !important;
-    color: var(--primary) !important;
-    background-color: transparent !important;
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
-    background-color: var(--accent) !important;
+.btn:hover, .btn-outline-dark:hover,
+.nav-link:hover, .navbar .nav-link:hover {
+    background-color: var(--accent);
     color: var(--white) !important;
-    border-color: var(--accent) !important;
+    text-decoration: none !important;
+    border-radius: 0 !important;
 }
 
 /* ===============================
@@ -119,30 +86,25 @@ a:hover {
 }
 
 .navbar-brand img {
+    object-fit: contain;
 }
 
-
-.btn:hover,
-.btn:focus,
-.btn:active {
-    background-color: var(--accent) !important;
-    color: var(--white) !important;
-    border-color: var(--accent) !important;
+.brand-text {
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--primary);
 }
 
 .nav-link {
     color: var(--primary);
     margin-left: 22px;
     font-weight: 500;
-    padding: 8px 16px !important;
-    transition: all 0.3s ease;
 }
 
 .nav-link:hover,
 .nav-link.active {
-    background-color: #84846f;
-    color: var(--white);
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 6px;
 }
 
 /* ===============================
@@ -282,16 +244,18 @@ footer {
    =============================== */
 
 .home-hero {
-    min-height: 500px; /* reduced height */
-    background-image: none;
+    min-height: calc(100vh - 90px); /* accounts for navbar height */
+    background-image: url("../static/images/law-office-bg.jpg");
+    background-size: cover;
+    background-position: center;
     position: relative;
     border-radius: 18px;
-    overflow: visible;
+    overflow: hidden;
 }
 
 /* Soft overlay for readability */
 .home-hero-overlay {
-    background: transparent;
+    background: rgba(214, 214, 193, 0.85); /* based on your background color */
     height: 100%;
     display: flex;
     align-items: center;

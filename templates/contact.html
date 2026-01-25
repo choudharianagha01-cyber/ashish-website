@@ -3,13 +3,12 @@
 {% block content %}
 <div class="contact-wrapper">
     <div class="lawyer-card text-center">
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Firm Logo" class="lawyer-logo mb-3">
-        <h3 class="firm-name">{{ firm_name }}</h3>
+        <img src="{{ url_for('static', filename=image_logo) }}" alt="Firm Logo" class="lawyer-logo mb-3">
+        <h3 class="firm-name" style="color:var(--primary);">{{ firm_name }}</h3>
         <hr class="divider">
-
-        <p><i class="bi bi-geo-alt-fill contact-icon"></i> Chamber 101, XYZ Building, Connaught Place, New Delhi - 110001</p>
-        <p><i class="bi bi-telephone-fill contact-icon"></i> +91 9876543210</p>
-        <p><i class="bi bi-envelope-fill contact-icon"></i> advocate.name@example.com</p>
+        <p><i class="bi bi-geo-alt-fill contact-icon"></i> {{ contact_address }}</p>
+        <p><i class="bi bi-telephone-fill contact-icon"></i> {{ contact_phone }}</p>
+        <p><i class="bi bi-envelope-fill contact-icon"></i> {{ contact_email }}</p>
     </div>
 </div>
 {% endblock %}

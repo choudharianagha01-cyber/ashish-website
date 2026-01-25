@@ -2,36 +2,17 @@
 
 {% block content %}
 <div class="text-center mb-5">
-    <h2 class="section-title">Practice Areas</h2>
+    <h2 class="section-title" style="color:var(--primary);">Practice Areas</h2>
     <p class="lead">Explore the areas of law we specialize in</p>
 </div>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-    {% set practices = [
-        ("Criminal Law", "fa-gavel"),
-        ("Civil Litigation", "fa-scale-balanced"),
-        ("Family Law", "fa-people-roof"),
-        ("Property Law", "fa-house-chimney"),
-        ("Corporate Law", "fa-building-columns"),
-        ("Constitutional Law", "fa-landmark"),
-        ("Consumer Law", "fa-cart-shopping"),
-        ("Labour Law", "fa-briefcase"),
-        ("Tax Law", "fa-file-invoice-dollar"),
-        ("Environmental Law", "fa-leaf"),
-        ("Intellectual Property", "fa-lightbulb"),
-        ("Cyber Law", "fa-shield-halved"),
-        ("Immigration Law", "fa-passport"),
-        ("Contract Law", "fa-file-contract"),
-        ("Banking Law", "fa-piggy-bank"),
-        ("Education Law", "fa-graduation-cap")
-    ] %}
-
-    {% for name, icon in practices %}
+    {% for area in practice_areas %}
     <div class="col">
-        <div class="card text-center practice-card h-100">
+        <div class="card text-center practice-card h-100" style="background:var(--background);color:var(--primary);">
             <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                <i class="fas {{ icon }} fa-2x mb-3 text-primary"></i>
-                <h5 class="card-title">{{ name }}</h5>
+                <i class="fas {{ area.icon }} fa-2x mb-3 practice-icon" style="color:var(--accent);"></i>
+                <h5 class="card-title" style="color:var(--primary);">{{ area.name }}</h5>
             </div>
         </div>
     </div>
