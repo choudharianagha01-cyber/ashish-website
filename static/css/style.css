@@ -69,9 +69,11 @@ body {
 .home-bg {
     background-image: url("../images/homepage_bg.png");
     background-size: contain;
-    background-position: right bottom;
+    background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-color: var(--color-secondary) !important;
+    /* min-height removed to prevent forced cropping */
 }
 
 /* Headings */

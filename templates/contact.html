@@ -3,13 +3,15 @@
 {% block content %}
 <div class="contact-wrapper" style="background: transparent;">
     <div class="lawyer-card text-center" style="background: #e3e3d6 !important; border: 2px solid #84846f; max-width: 700px; min-width: 400px; margin: 0 auto; padding: 32px 48px 24px 48px; border-radius: 18px;">
-        <img src="{{ url_for('static', filename=image_logo) }}" alt="Firm Logo" class="lawyer-logo mb-3">
-        <div style="font-size:1.5rem; color:var(--primary); font-weight:600; margin-bottom: 10px;">{{ firm_name }}</div>
-        <div style="font-size:1.5rem; color:var(--primary); font-weight:600; margin-bottom: 10px;">
-            {{ lawyer_name_contact }}
-            {% if lawyer_qualification_contact %}
-                <span style="font-size:1.1rem; font-weight:400;"> ({{ lawyer_qualification_contact }})</span>
-            {% endif %}
+        <div style="display:flex; justify-content:center; align-items:center; width:100%; margin-bottom:1rem;">
+            <img src="{{ url_for('static', filename=image_logo) }}" alt="Firm Logo" style="max-width:110px; max-height:110px; width:auto; height:auto; object-fit:contain; display:block;">
+        </div>
+        <div style="font-size:2.8rem; color:var(--primary); font-weight:800; margin-bottom: 14px;">{{ firm_name }}</div>
+        <div style="font-size:2.1rem; color:var(--primary); font-weight:700; margin-bottom: 10px;">
+                <div>{{ lawyer_name_contact }}</div>
+                {% if lawyer_qualification_contact %}
+                    <div style="font-size:1.2rem; font-weight:400; margin-top:2px;">{{ lawyer_qualification_contact }}</div>
+                {% endif %}
         </div>
         <hr class="divider">
         <p><i class="bi bi-geo-alt-fill contact-icon"></i> {{ contact_address }}</p>
